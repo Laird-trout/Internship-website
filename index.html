@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ECE Internship Atlas — Summer 2027</title>
+<meta name="description" content="A filterable catalog of Summer 2027 electrical and computer engineering internships, built for a sophomore at Oregon State. Employers, sophomore-friendly programs, deadlines, and an application tracker.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-row">
+    <a class="brand" href="#catalog">
+      <span class="brand-title">ECE Internship Atlas</span>
+      <span class="brand-season">Summer 2027</span>
+    </a>
+    <nav class="tabs" aria-label="Sections">
+      <button class="tab is-active" data-tab="catalog" aria-selected="true">Catalog</button>
+      <button class="tab" data-tab="programs">Sophomore programs</button>
+      <button class="tab" data-tab="timeline">Timeline</button>
+      <button class="tab" data-tab="playbook">Playbook</button>
+      <button class="tab" data-tab="resources">Resources</button>
+      <button class="tab" data-tab="tracker">My tracker <span class="tab-count" id="tracker-count" hidden>0</span></button>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Switch color theme">Dark</button>
+  </div>
+  <p class="summary" id="summary" aria-live="polite">Loading the catalog.</p>
+</header>
+
+<main>
+
+<!-- ============ CATALOG ============ -->
+<section class="panel is-active" id="panel-catalog" data-panel="catalog">
+  <div class="controls">
+    <label class="search">
+      <span class="visually-hidden">Search employers</span>
+      <input id="search" type="search" placeholder="Search employers, roles, cities, notes" autocomplete="off">
+    </label>
+    <label class="sort">Sort
+      <select id="sort">
+        <option value="soph">Sophomore-friendly first</option>
+        <option value="name">Name A to Z</option>
+        <option value="opens">Opens earliest</option>
+        <option value="pay">Pay tier</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="filters" id="filters">
+    <div class="filter-group quick">
+      <button class="chip chip-soph" data-filter="soph" aria-pressed="false">Regularly hires sophomores</button>
+      <button class="chip" data-filter="pnw" aria-pressed="false">Near Corvallis (OR, WA, ID)</button>
+      <button class="chip" data-filter="open" aria-pressed="false">No citizenship requirement</button>
+      <button class="chip" data-filter="tracked" aria-pressed="false">In my tracker</button>
+    </div>
+    <div class="filter-group">
+      <label>Sector <select id="f-sector"><option value="">All sectors</option></select></label>
+      <label>Opens <select id="f-opens"><option value="">Any month</option></select></label>
+      <label>Pay tier <select id="f-pay"><option value="">Any</option><option value="3">Top of market</option><option value="2">Strong industry</option><option value="1">Stipend / utility</option></select></label>
+      <button class="link-button" id="clear-filters">Clear filters</button>
+    </div>
+    <div class="filter-group tags" id="f-tags" aria-label="Discipline"></div>
+  </div>
+
+  <div class="legend">
+    <span><mark class="soph-mark">Sophomore-friendly</mark> = regularly hires second-years.</span>
+    <span>Citizenship: <b>US</b> citizen required, <b>US/PR</b> citizen or permanent resident, <b>open</b> no requirement.</span>
+    <span>Pay tiers are rough historical bands: $$$ roughly $40+/hr, $$ about $25–40/hr, $ stipend or utility scale.</span>
+    <span>Every "opens" month is the historical pattern, not a live posting. Confirm at the careers link and mark it in your tracker.</span>
+  </div>
+
+  <ol class="employer-list" id="employer-list"></ol>
+  <p class="empty" id="empty" hidden>No employers match. Loosen a filter or clear the search.</p>
+</section>
+
+<!-- ============ PROGRAMS ============ -->
+<section class="panel" id="panel-programs" data-panel="programs">
+  <div class="prose">
+    <h1>Programs that take first- and second-year students</h1>
+    <p>Most internship postings say "junior or senior preferred." These are the exceptions: structured programs that either exist specifically for early undergraduates or have a long track record of hiring them. Federal research programs are the deepest pool for sophomores in EE, and they pay a living stipend with housing help.</p>
+  </div>
+  <div class="program-list" id="program-list"></div>
+</section>
+
+<!-- ============ TIMELINE ============ -->
+<section class="panel" id="panel-timeline" data-panel="timeline">
+  <div class="prose">
+    <h1>September 2026 to August 2027</h1>
+    <p>Sophomore recruiting is front-loaded: the biggest employers open in August and September and fill on a rolling basis. Federal programs run on fixed deadlines from November to February. Utilities and small firms post last. Dates below are the usual windows; the source of truth is always the posting.</p>
+  </div>
+  <ol class="timeline" id="timeline"></ol>
+</section>
+
+<!-- ============ PLAYBOOK ============ -->
+<section class="panel" id="panel-playbook" data-panel="playbook">
+<div class="prose playbook">
+
+<h1>How a sophomore actually gets an EE internship</h1>
+<p>There are fewer sophomore slots, so the game is different from the junior cycle. You win on four things: applying early to the employers that genuinely hire second-years, showing up at career fairs with a project you can talk about for ten minutes, applying in volume without letting quality slip, and treating federal research programs as first-class options rather than backups.</p>
+
+<h2>Build your target list</h2>
+<ul>
+  <li>Filter the catalog to <em>Regularly hires sophomores</em>. That is your primary list; apply to all of them.</li>
+  <li>Add <em>Near Corvallis</em>. Regional employers interview Oregon State students at higher rates because they can hire locally and cheaply, and many recruit at the OSU engineering career fairs.</li>
+  <li>Add every federal program you are eligible for (NASA OSTEM, DOE SULI, NIST SURF, NREIP, AFRL Scholars, Sandia, PNNL). They accept students who have completed one year, and the competition from upperclassmen is thinner than in industry.</li>
+  <li>Pick ten "reach" employers you would love regardless of odds. Apply, then forget about them.</li>
+</ul>
+
+<h2>Resume that works for an ECE sophomore</h2>
+<p>One page. Recruiters at a fair spend under twenty seconds on it. Order the sections by what you have the most of: <strong>Education, Skills, Projects, Experience, Activities</strong>. For a sophomore, Projects usually outranks Experience, so put it higher.</p>
+<ul>
+  <li><strong>Education:</strong> Oregon State University, B.S. Electrical and Computer Engineering, expected 2029. GPA if 3.3 or above. Relevant coursework as a single line (circuits, digital logic, programming, signals).</li>
+  <li><strong>Skills:</strong> group by type, not as one list. Hardware: oscilloscope, DMM, function generator, soldering, breadboarding. Design tools: KiCad or Altium, LTspice, MATLAB. Languages: C, Python, Verilog or VHDL, assembly. Platforms: Arduino, STM32, ESP32, Raspberry Pi, FPGA dev board.</li>
+  <li><strong>Projects:</strong> three to five, each with two or three bullets. Use the formula <em>did X using Y, achieving Z</em>. "Designed a two-layer PCB in KiCad for a 3.3 V sensor node; verified rails and I2C traffic with an oscilloscope; reduced idle draw to 8 mA."</li>
+  <li><strong>Experience:</strong> any job counts. Retail, lifeguarding, tutoring. Frame it around responsibility and reliability, one or two bullets each.</li>
+  <li>Cut objective statements, references, high-school awards, and soft-skill lists. Put a GitHub link and a project portfolio link in the header.</li>
+</ul>
+
+<h2>Projects that convert into interviews</h2>
+<p>Interviewers hire sophomores on evidence of hands-on ability and curiosity. The project does not need to be novel; it needs to be finished, documented, and understood deeply.</p>
+<ul>
+  <li>A custom PCB you designed, ordered, assembled, and debugged. Even a simple one. Being able to say "I've had a board fabricated" separates you from most sophomores.</li>
+  <li>An embedded system with real sensors and a real constraint (battery life, timing, noise). Talk about the bug that took longest.</li>
+  <li>An FPGA design in Verilog or VHDL: a UART, a VGA controller, a simple CPU. Know your timing diagrams.</li>
+  <li>A power or motor project: a buck converter, an H-bridge motor driver, a battery charger. Measured efficiency is a great talking point.</li>
+  <li>An instrument or RF build: a metal detector, an antenna you measured, a software-defined-radio receiver, a signal generator. Anything where you had to measure a physical signal and reason about noise.</li>
+  <li>Document each project with a short write-up, a schematic, a photo, and the code on GitHub. Link them from your portfolio site.</li>
+</ul>
+
+<h2>Career fair script</h2>
+<p>Oregon State runs engineering career fairs in fall and winter (check the Career Development Center calendar; fall is typically October and winter is typically February). Go to both. Research the employer list the week before and pick fifteen tables in priority order.</p>
+<ol>
+  <li><strong>Open (15 seconds):</strong> "Hi, I'm Laird, a sophomore in ECE at Oregon State. I'm looking for a summer 2027 hardware internship, and I'm especially interested in [their thing]."</li>
+  <li><strong>Proof (30 seconds):</strong> one project, told as a problem you hit and how you solved it, with a number in it.</li>
+  <li><strong>Ask (one question):</strong> "Do your intern roles take sophomores?" or "What does your team look for in early-undergrad interns?" Their answer tells you whether to spend more time.</li>
+  <li><strong>Close:</strong> get a name and email, ask if there's a specific req to apply to, and write it down before the next table.</li>
+  <li><strong>Within 24 hours:</strong> send the follow-up email below and apply to the req they named. Mention the fair conversation in the application if there's a field for it.</li>
+</ol>
+
+<h2>Application volume and cadence</h2>
+<ul>
+  <li>Target 60 to 100 applications between September and February. Two per weekday is enough.</li>
+  <li>Apply within two weeks of a posting going live. Rolling programs (Lockheed, Tesla, SpaceX, Apple, the defense primes) fill early.</li>
+  <li>Tailor the resume lightly, not heavily: swap which project is first, adjust the skills line. Don't rewrite it per application.</li>
+  <li>Write a cover letter only when required or for your top ten. Three short paragraphs: why them, why you fit, one specific thing you built.</li>
+  <li>Log every application in the tracker on this site with the date. Follow up on silent applications after three weeks with a short email to the recruiter.</li>
+</ul>
+
+<h2>Technical interview checklist (sophomore level)</h2>
+<p>Interviewers calibrate to your year. They will probe fundamentals and how you think, not advanced theory.</p>
+<ul>
+  <li><strong>Circuits:</strong> KVL and KCL, Thevenin and Norton, voltage dividers, RC and RL time constants, first-order filters, op-amp inverting and non-inverting configurations, ideal-op-amp assumptions, diode and MOSFET basics.</li>
+  <li><strong>Digital:</strong> Boolean simplification and K-maps, combinational vs sequential logic, flip-flops and latches, finite state machines, setup and hold time, metastability, what a clock domain is, basic Verilog structure.</li>
+  <li><strong>Embedded:</strong> C pointers and bit manipulation, volatile, interrupts vs polling, UART/SPI/I2C differences and when to use each, timers and PWM, ADC resolution and sampling, reading a datasheet register map.</li>
+  <li><strong>Signals:</strong> what the Fourier transform tells you, sampling and Nyquist, aliasing, why you low-pass before an ADC.</li>
+  <li><strong>Power:</strong> linear regulator vs switching regulator trade-offs, buck converter operation at a block level, why MOSFETs switch losses matter, battery C-rates and basic Li-ion safety.</li>
+  <li><strong>Bench:</strong> how to set up an oscilloscope trigger, what probe loading is, how to find a short on a board, how you debugged your own project.</li>
+  <li><strong>Behavioral:</strong> prepare five stories in situation, action, result form: a bug you fixed, a team conflict, a deadline miss, a time you learned something fast, a time you were wrong.</li>
+</ul>
+
+<h2>Citizenship and clearances, in plain terms</h2>
+<ul>
+  <li><strong>US citizen required</strong> means exactly that, usually because the role needs a security clearance or the work is classified. Defense primes and the intelligence community.</li>
+  <li><strong>US person</strong> (citizen or permanent resident) is an export-control (ITAR) requirement, common at aerospace companies and national labs. International students on F-1 visas generally cannot fill these roles.</li>
+  <li>Clearance timelines are long. NSA and some DoD roles have deadlines in October or November for the following summer because the background investigation takes months. Apply to those first.</li>
+  <li>If you are an international student, sort by <em>No citizenship requirement</em>. Semiconductor companies, big tech, automotive, medical devices, and most industrial firms sponsor CPT interns routinely.</li>
+</ul>
+
+<h2>Templates</h2>
+<h3>Career fair follow-up (send within 24 hours)</h3>
+<pre>Subject: Thanks for talking at the OSU career fair
+
+Hi [Name],
+
+Thanks for taking the time at the Oregon State engineering fair today.
+I enjoyed hearing about [specific thing they said].
+
+As mentioned, I'm a sophomore in ECE looking for a summer 2027 hardware
+internship. I've applied to [req title / number] and attached my resume.
+The [project] I described is written up here: [link].
+
+I'd welcome any advice on the process. Thanks again.
+
+Laird
+[phone] · [email] · [portfolio]</pre>
+
+<h3>Cold email to a recruiter or engineer</h3>
+<pre>Subject: Sophomore EE at Oregon State, summer 2027 internship
+
+Hi [Name],
+
+I'm a second-year electrical and computer engineering student at Oregon
+State University. I'm reaching out because [company]'s work on [specific
+product or team] is exactly what I want to do, and I noticed [posting or
+program].
+
+Recently I built [project in one sentence with a number]. Resume attached
+and portfolio here: [link].
+
+Would you be open to a 15-minute call, or could you point me to the right
+person for early-undergraduate hiring? Thanks for your time.
+
+Laird</pre>
+
+<h3>Follow-up on a silent application (after three weeks)</h3>
+<pre>Subject: Following up on [role] application
+
+Hi [Name],
+
+I applied to [role, req number] on [date] and wanted to reaffirm my
+interest. I'm a sophomore in ECE at Oregon State with hands-on PCB and
+embedded experience ([one-line proof]).
+
+If the role is still open, I'd be glad to share anything else that would
+help. Thanks.
+
+Laird</pre>
+
+<h2>If the offer doesn't come</h2>
+<p>Plenty of strong engineers land their first internship as juniors. If it's April and nothing has landed: ask an OSU faculty member about paid summer research (many labs hire sophomores who ask in person), look at the OSU URSA Engage program for the following year, take on a paid campus technical job, or spend the summer finishing one ambitious, well-documented project. Any of those makes the junior-year cycle dramatically easier.</p>
+
+</div>
+</section>
+
+<!-- ============ RESOURCES ============ -->
+<section class="panel" id="panel-resources" data-panel="resources">
+  <div class="prose">
+    <h1>Where postings actually surface</h1>
+    <p>Company career pages are the source of truth, but they are slow to browse. These aggregators and school channels catch most postings within a day or two of going live.</p>
+  </div>
+  <div class="resource-groups" id="resource-groups"></div>
+</section>
+
+<!-- ============ TRACKER ============ -->
+<section class="panel" id="panel-tracker" data-panel="tracker">
+  <div class="prose">
+    <h1>My applications</h1>
+    <p>Tracked in this browser only. Export a backup before clearing your browser data or switching machines.</p>
+  </div>
+  <div class="tracker-actions">
+    <button class="button" id="export-csv">Export CSV</button>
+    <button class="button" id="export-json">Export backup</button>
+    <label class="button button-quiet">Import backup <input type="file" id="import-json" accept="application/json" hidden></label>
+    <button class="link-button danger" id="clear-tracker">Clear all</button>
+  </div>
+  <div id="tracker-table"></div>
+  <p class="empty" id="tracker-empty">Nothing tracked yet. Open an employer in the catalog and choose "Track".</p>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p>Built from public careers pages and historical hiring patterns as of September 2026. Nothing here is a live posting; verify every date at the source. Add or correct an employer by editing <code>data/catalog.js</code> and opening a pull request.</p>
+</footer>
+
+<script src="data/catalog.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
